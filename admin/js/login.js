@@ -22,7 +22,7 @@ $(function () {
         }
         // 5.ajax发送请求
         $.ajax({
-            url: 'http://localhost:8080/api/v1/admin/user/login',
+            url: BigNew.user_login,
             type: 'post',
             dataType: 'json',
             data: {
@@ -30,7 +30,7 @@ $(function () {
                 password: password
             },
             success: function (backData) {
-                // 6.处理响应结果       
+                // 6.处理响应结果 
                 if (backData.code == 400) {
                     //b.失败：提示用户
                     alert(backData.msg);
