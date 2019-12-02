@@ -17,7 +17,9 @@ $(function () {
         var password = $('.input_pass').val().trim();
         // 4.非空判断
         if (username.length == 0 || password.length == 0) {
-            alert('不能为空！');
+            // alert('不能为空！');
+            $('.modal-body>p').text('请输入正确的账号和密码');
+            $('#myModal').modal();
             return
         }
         // 5.ajax发送请求
@@ -33,12 +35,19 @@ $(function () {
                 // 6.处理响应结果 
                 if (backData.code == 400) {
                     //b.失败：提示用户
-                    alert(backData.msg);
+                    // alert(backData.msg);
+                    $('.modal-body>p').text(backData.msg);
+                    $('#myModal').modal();
                 } else {
                     //a.成功：跳转管理系统首页
-                    alert('登录成功！');
-                    localStorage.setItem('token',backData.token);
-                    window.location.href = "./index.html";
+                    // alert('登录成功！');
+                    $('.modal-body>p').text(backData.msg);
+                    $('#myModal').modal();
+                    localStorage.setItem('token', backData.token);
+                    $('#myModal').on('hidden.bs.modal', function (e) {
+                        window.location.href = "./index.html";
+                    })
+
                 }
             }
         });
